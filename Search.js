@@ -1,18 +1,19 @@
 import React, {Fragment} from 'react';
 import {Form, FormGroup, FormControl, Container, Row} from 'react-bootstrap';
 import GoogleBook from './GoogleBook';
+import MoviesItems from './MoviesItems';
 import styled from 'styled-components';
 import GoogleLogin from 'react-google-login';
 
 
-export default class Search extends React.Component {
+ class Search extends React.Component {
 
 	constructor(props){
 		super(props)
 		this.state = { 
 			search : '', 
 			books:[],
-			music:[]
+			movies:[]
 		}
 	}
 
@@ -24,14 +25,15 @@ export default class Search extends React.Component {
 		.then(response => response.json())
 		.then(json => this.setState({books: json, isFetching: false,}));
 
-		fetch(`https://api.deezer.com/album/302127`)
+		fetch(`https://api.themoviedb.org/3/search/movie?api_key=d62acee627fa0503830a6e257e522480&query=${e.target.value}`)
 		.then(response => response.json())
-		.then(json => this.setState({music: json, isFetching: false,}));
-		console.log(this.state.music);
+		.then(json => this.setState({movies: json, isFetching: false,}));
+	
 	}
 
 	handleSubmit = e =>{
 		const form = event.currentTarget;
+
     if (form.checkValidity() === false) {
     	  event.preventDefault();
     	  event.stopPropagation();
@@ -51,7 +53,7 @@ export default class Search extends React.Component {
 		}
 		return (
 
-			<div className="l-container">
+			<Container>
 					<div id="search-api">
 						<Form>
 							<FormGroup>
@@ -59,6 +61,11 @@ export default class Search extends React.Component {
 							</FormGroup>
 						</Form>
 					<br />
+							
+							<div id="books-results">
+							<h2>Books </h2>
+
+							<br />
 							<Row>
 							{!this.state.isFetching && this.state.search.lenght === 0 && this.state.books.trim === '' &&
 								<p>Entrez le nom d'un oeuvre</p>
@@ -68,12 +75,21 @@ export default class Search extends React.Component {
 							}
 							{ !this.state.isFetching && this.state.search.length !== 0 &&
 								books
+								
 							}
 							</Row>
+							</div>	
+							<br />
+							<div  id="movies-results">
+								<h2>Movies</h2>
+								<MoviesItems movies={this.state.movies} />
+							</div>	
+						
 				
 					</div>
-			</div>
+			</Container>
 
 		);
 	}
 }
+export default Search;

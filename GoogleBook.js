@@ -15,7 +15,7 @@ export default class GoogleBook extends React.Component {
 	render() {
 	
 		return (
-			<Col>
+			<Col sm={4}>
 				{this.props.volume.imageLinks &&
 
 						<img src={this.props.volume.imageLinks.thumbnail} width="128px" height="207px" />
@@ -25,7 +25,7 @@ export default class GoogleBook extends React.Component {
 					<img src={logoT} width="128px" height="207px" />
 
 				}
-				<p>{this.props.volume.title}</p>
+				<h5>{this.props.volume.title}</h5>
 			</Col>
 		);
 	}
