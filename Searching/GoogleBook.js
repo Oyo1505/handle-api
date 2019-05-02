@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col} from 'react-bootstrap';
+
 import logoT from '../../images/tetris.jpg';
 
 export default class GoogleBook extends React.Component {
@@ -9,13 +9,9 @@ export default class GoogleBook extends React.Component {
 	
 	}
 
-	componentWillmount(){
-
-	}
 	render() {
-	
 		return (
-			<Col sm={4}>
+			<div>
 				{this.props.volume.imageLinks &&
 
 						<img src={this.props.volume.imageLinks.thumbnail} width="128px" height="207px" />
@@ -25,8 +21,8 @@ export default class GoogleBook extends React.Component {
 					<img src={logoT} width="128px" height="207px" />
 
 				}
-				<h5>{this.props.volume.title}</h5>
-			</Col>
+				<h6>{this.props.volume.title}</h6>
+			</div>
 		);
 	}
 }
