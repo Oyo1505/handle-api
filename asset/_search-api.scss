@@ -1,8 +1,11 @@
+.continer-api{
+  
+}
 #search-api{
 	margin-top: 20px;
-	text-align: center;
-	margin-bottom: 20px;
 
+	margin-bottom: 20px;
+  position: relative;
 	height: auto;
 }
 
@@ -12,21 +15,88 @@
 }
 
 #books-results{
-	height: auto;
-	width: 100%;
-}
-#movies-results{
-  height: auto;
-  width: 100%;
+
 
 }
-.movie-item{
-  float: left;
-}
-.box {
-  cursor: pointer;
+.items-results{
   position: relative;
-  width: 25%;
-  height: 20%;
-  will-change: transform;
+  width: 100%;
+  padding: 12px;
+  margin: 0 auto;
+  display: grid;
+  border-radius: 15px;
+  p{
+    font-size: inherit;
+  }
+  img{
+    float: left;
+    margin-right: 30px;
+    border-radius: 15px;
+  }
+
+  .items-list-info{
+    width: 60%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-start;
+    top: 50%;
+    left:49%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+.info-wrapper{
+  h3{
+    color: inherit;
+  }
+}
+@media only screen and (min-width: 768px) {
+
+  .items-results{
+    .items-list-info{
+      left:23%;
+    }
+  }
+}
+@media only screen and (min-width: 1030px) {
+  /*search*/
+  .items-results{
+    .items-list-info{
+      left:23%;
+    }
+      &:hover{
+    box-shadow: 0px 20px 50px -10px rgba(0, 0, 0, 0.2);
+ }
+  }
+
+  /*movie single page*/
+  .movie-detail{
+    .poster{
+      float: left;
+      margin-right: 20px;
+    }
+    .info-wrapper{
+      width: 70% ;
+      height: auto;
+      margin: 0 auto;
+      float:right;
+      ul{
+        padding: 0;
+      }
+    }
+    .overview{
+
+    }
+  }
+}
+@media only screen and (min-width: 1800px) {
+
+  .items-results{
+    .items-list-info{
+      left:15%;
+    }
+  }
+   /*movie single page*/
 }

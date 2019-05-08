@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Spring, animated, config } from 'react-spring/renderprops';
 import Nav from "../components/Nav"
 import code from '../images/code.jpg'
 
@@ -6,11 +7,11 @@ class Header extends Component {
 
 
 
-	render(){
+    render() {
 
-		const { title, background } = this.props;
-		return(
-				<header>
+        const { title, background } = this.props;
+        return (
+            <header>
 
 						
 							
@@ -26,12 +27,24 @@ class Header extends Component {
 						 	}
 						 	{background && 
 						 		<>
-						 		<div className='carousel-box'>
-						 			<div className='pixel-opacity'></div>
-						 			<h1>{title}</h1>
-						 			<img  margin={0} className='image-fixed' alt="1920x750" src={`https://image.tmdb.org/t/p/w1400_and_h450_face${background}`}  />
-						 		</div>
-						 		</>
+								<Spring
+								config={config.molasses}
+						        from={{ marginTop: -80, opacity: 0 }}
+     							to={{ marginTop: 0, opacity: 1 }}
+						       	duration={3200}
+								>
+								{props => (
+										
+						 			<>
+							 		<div style={props} className='carousel-box'>
+							 			<div className='pixel-opacity'></div>
+							 			<h1>{title}</h1>
+							 			<img  margin={0} className='image-fixed' alt="1920x750" src={`https://image.tmdb.org/t/p/w1400_and_h450_face${background}`}  />
+							 		</div>
+						 			</>
+								 )}
+								</Spring>	
+								</>
 						 	}
 						 	
 						
@@ -39,19 +52,8 @@ class Header extends Component {
 						
 				</header>
 
-			);
-	}
+        );
+    }
 }
 
 export default Header
-/*
-{background && 
-						 		<>
-						 		<div className='carousel-box'>
-						 			<h1>{title}</h1>
-						 			<img  margin={0} className='image-fixed' alt="1920x750" src={`https://image.tmdb.org/t/p/w1400_and_h450_face${background}`}  />
-						 		</div>
-						 		</>
-						 	}
-
-*/

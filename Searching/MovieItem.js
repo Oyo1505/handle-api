@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
-import {Col} from 'react-bootstrap';
 
 const MovieItem = (props) => {
 
-  return (
-    <div className="movie-item">
+    return (
+        <Fragment>
 
-    	<img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${props.movie.poster_path}`} width="128px" height="207px" alt={props.movie.title}/>
-    	<h6>{props.movie.title}</h6>
-    	
-    </div>
-  )
+    		<img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${props.movie.poster_path}`} width="128px" height="207px" alt={props.movie.title}/>
+    		<div className="items-list-info">
+    			<h5>{props.movie.title}</h5>
+    			<p>
+    				Sortie en {props.movie.release_date}
+    			</p>
+    		</div>
+    	</Fragment>
+    )
 }
 
 export default MovieItem;
