@@ -52,7 +52,7 @@ class SingleMovie extends Component {
         const { show, video, casting } = this.state;
         let actorsList;
         let crewList;
-        
+        console.log(show, video)
         //console.log(window.location.pathname); //yields: "/js" (where snippets run)
         //console.log(window.location.href);
         if (casting) {
@@ -85,13 +85,13 @@ class SingleMovie extends Component {
             <Fragment>
 						
 							{show === undefined && 
-								<>
+								<Fragment>
 								<Header />
 									<p>Loading....</p>
-								</>
+								</Fragment>
 							}
 							{show !== null && video !== null &&
-								<>
+								<Fragment>
 						
 									
 								<Header  background={show.backdrop_path} title={show.original_title} />
@@ -103,17 +103,21 @@ class SingleMovie extends Component {
      							to={{ marginLeft: 0, opacity: 1 }}
 								>
 								{props => (
-									<>
+									<Fragment>
 										<section style={props} className="movie-detail">
 										<div>
 											<img className="poster" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${show.poster_path}`} width='300px' height="450px" />
 											<div className="info-wrapper">
 												<span> 
 													<ul className="header-action">
-
-														<li id="circle-movie" ><CircularProgressbar  text={`${show.vote_average * 10 }% `}   percentage={show.vote_average * 10 } styles={{ path: {transition: 'stroke-dashoffset 0.3s ease 0s',}, background: { fill: '#000', }, color: '#000' }} strokeWidth="8"/></li>
-														<li><a href={show.homepage}>Official Website</a></li>
-														<li><a href={`https://www.youtube.com/watch?v=${video.results[0].key}`}><i className='icon icon-play'></i> Play trailer</a></li>
+														{video.results && show.homepage && show.vote_average &&
+															<Fragment>
+																<li id="circle-movie" ><CircularProgressbar  text={`${show.vote_average * 10 }% `}   percentage={show.vote_average * 10 } styles={{ path: {transition: 'stroke-dashoffset 0.3s ease 0s',}, background: { fill: '#000', }, color: '#000' }} strokeWidth="8"/></li>
+																<li><a href={show.homepage}>Official Website</a></li>
+																<li><a href={`https://www.youtube.com/watch?v=${video.results[0].key}`}><i className='icon icon-play'></i> Play trailer</a></li>
+															</Fragment>
+														}
+																												
 													</ul>
 													<div className="clear"></div>
 												</span>
@@ -132,7 +136,7 @@ class SingleMovie extends Component {
 												<h3>Infos</h3>
 													<div className="info-technic">
 														<ul>
-															<li> Budget : {show.budget}$</li>
+															<li> Budget : {show.budget === 0 && <span> Nothing to show</span>}{show.budget > 0 && show.budget } $ </li>
 															<li> Realse : {show.release_date}</li>
 															<li>Genre : {show.genres.map(genre => (
 																	 <span> {genre.name } </span> 
@@ -152,24 +156,27 @@ class SingleMovie extends Component {
 												</ul>	
 										</div>
 										</section>
-									</>
+									</Fragment>
 								 )									
 								}
 								</Spring>
 									<section className="section-video">
 
 										<p>suggestion video</p> <button onClick={this.toggle}> afficher </button><br />
+										{!video.results &&
+											<p>Pas de video disponible pour ce film</p>
+										}
 										{video.results.map(vid => (	
 											<iframe width="280"
 											 height="157" 
 											 src={`https://www.youtube.com/embed/${vid.key}`} 
 											 frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
 											 allowFullScreen>
-											</iframe>	))}
+											</iframe>))}
 									</section>
 									</div>
 									<aside>social media</aside>
-								</>
+								</Fragment>
 
 							 }
 							
