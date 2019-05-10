@@ -38,10 +38,18 @@ class Search extends React.Component {
             .then(json => this.setState({ movies: json, isFetching: false, }));
 
     }
+    
     handleSelect = value => {
         this.setState({select: value });
-        if( value === this.state){
-        	console.log("ftgds")
+
+        if( value === 'books'){
+        	fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.state.search}&key=AIzaSyAlN3r_xXHhgpuwYTYFcl4c3kKZJc6rXTY`)
+            .then(response => response.json())
+            .then(json => this.setState({ books: json, movies: [], }));
+        }else if( value === 'movies'){
+        	fetch(`https://api.themoviedb.org/3/search/movie?api_key=d62acee627fa0503830a6e257e522480&query=${this.state.search}`)
+            .then(response => response.json())
+            .then(json => this.setState({ books: [], movies: json}));
         }
     }
 
