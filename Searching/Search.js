@@ -17,12 +17,12 @@ class Search extends React.Component {
             search: '',
             books: [],
             movies: [],
-            select: '',
+            select: null,
             itemsLength: 0,
         }
     }
 
-    handleChange = e => {
+    handleChange = async (e) => {
         e.preventDefault();
 
         this.setState({ search: e.target.value, isFetching: true, });
@@ -38,22 +38,21 @@ class Search extends React.Component {
             .then(json => this.setState({ movies: json, isFetching: false, }));
 
     }
-    
+    componentDidMount = () => {
+    	
+    	const json = localStorage.getItem("books");
+    	console.log(json)
+   	// const recipes = JSON.parse(json);
+    //this.setState({ recipes });
+    }
     handleSelect = value => {
         this.setState({select: value });
-
-        if( value === 'books'){
-        	fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.state.search}&key=AIzaSyAlN3r_xXHhgpuwYTYFcl4c3kKZJc6rXTY`)
-            .then(response => response.json())
-            .then(json => this.setState({ books: json, movies: [], }));
-        }else if( value === 'movies'){
-        	fetch(`https://api.themoviedb.org/3/search/movie?api_key=d62acee627fa0503830a6e257e522480&query=${this.state.search}`)
-            .then(response => response.json())
-            .then(json => this.setState({ books: [], movies: json}));
-        }
     }
 
-
+    deleteFilter = (e) =>{
+    	e.preventDefault();
+    	this.setState({select: null})
+    }
 
 
     render() {
@@ -63,7 +62,8 @@ class Search extends React.Component {
         return (
             <Fragment>	
 			<Header />  
-			<aside>
+			<aside className="filters-search">
+				<h4>Filtres</h4>
 				<FilterItems select={this.handleSelect} />
 			</aside>
 				<Container className="continer-api">
@@ -74,8 +74,10 @@ class Search extends React.Component {
   								  </FormGroup>
 							</Form>
 						<br />
-								
-							<div id="books-results">
+								{this.state.select && 
+									<button className="btn-filter">{this.state.select} <span onClick={this.deleteFilter}>X</span> </button>
+								}
+
 
 								{!this.state.isFetching && this.state.search.length === 0 && this.state.books.trim === '' &&
 									<p>Entrez le nom d'un oeuvre</p>
@@ -84,17 +86,14 @@ class Search extends React.Component {
 									<p>Loading...</p>
 								}
 								{ !this.state.isFetching && this.state.search.length !== 0 && this.state.books.items && this.state.books.items !== undefined &&
-									<>
-									<h2>Books </h2>
-									<br />
-									<GoogleBooksItems  books={this.state.books.items} />
-									</>
+							
+									<GoogleBooksItems select={this.state.select}  books={this.state.books.items} />
+									
 								}
 
-							</div>	
+							
 								<br />
-							<div  id="movies-results">
-
+						
 								
 								{!this.state.isFetching && this.state.search.length === 0 && this.state.movies.trim === '' &&
 									<p>Entrez le nom d'un oeuvre</p>
@@ -102,13 +101,8 @@ class Search extends React.Component {
 								{this.state.isFetching &&
 									<p>Loading...</p>
 								}
-								{ !this.state.isFetching && this.state.search.length !== 0 && this.state.movies.results !== undefined && 
-									<>
-									<h2>Movies</h2>
-									<br />
-									<MoviesItems movies={this.state.movies.results}   />	
-									</>
-									
+								{ !this.state.isFetching && this.state.search.length !== 0 && this.state.movies.results !== undefined && 	
+									<MoviesItems select={this.state.select} movies={this.state.movies.results}   />	
 								}
 			     					
 								
@@ -122,9 +116,10 @@ class Search extends React.Component {
 											
 										</Row>
 							</div>	
-						</div>	
+						
 					
 			</Container>
+			<div className="clear"></div>
 			</Fragment>
         );
     }
