@@ -1,5 +1,5 @@
 /*Search page*/
-.continer-api {}
+.container-api {}
 
 #search-api {
     margin-top: 20px;
@@ -13,9 +13,11 @@
     width: 50%;
 
 }
-#circle-movie{
-  width: 7%;
+
+#circle-movie {
+    width: 7%;
 }
+
 #books-results {}
 
 .items-results {
@@ -50,8 +52,28 @@
     }
 }
 
+/*BOOKS SINGLE PAGE*/
 
+#book-header{
+    width: 100%;
+    padding-top: 100px;
+    background: url('../../images/fancy-pants.jpg') repeat;
+     color: #FFFF;
+    h1{
+      
+        font-size: 2rem;
+    }
 
+   ul{
+    padding: 0;
+    margin: 0 auto;
+   }
+
+}
+
+.book-content{
+    padding: 10px;
+}
 /*Movie single page*/
 
 .info-wrapper {
@@ -116,13 +138,40 @@
 .info-wrapper {}
 
 @media only screen and (min-width: 768px) {
+    .filters-search {
+        float: left;
+        width: 15%;
+        padding-left: 10px;
+    }
 
     .items-results {
         .items-list-info {
             left: 23%;
         }
     }
+    /*BOOK SINGLE PAGE*/
+    #book-header{
+        vertical-align: middle;
+        justify-content: center;
+        text-align: center;
+        padding-bottom: 100px; 
+         img{
+             float: left;
+             margin-right: 50px;
 
+         }
+        .book-info-head{
+             float: left;
+            
+        }
+        ul{
+
+            li{
+                display: inline-block;
+            }
+        }
+
+    }
     /*single movie page*/
     .movie-detail {
         .header-action {

@@ -62,11 +62,11 @@ class Search extends React.Component {
         return (
             <Fragment>	
 			<Header />  
-			<aside className="filters-search">
+			<aside className="filters-search search-block">
 				<h4>Filtres</h4>
 				<FilterItems select={this.handleSelect} />
 			</aside>
-				<Container className="continer-api">
+				<Container className="continer-api search-block">
 						<div id="search-api">
 							<Form>
 								<FormGroup>
