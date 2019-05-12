@@ -21,7 +21,7 @@ class SingleBook extends React.Component {
     render() {
         const book = this.state.book;
         const active = this.state.active	
-        console.log(active)
+    
         return (
 
             <Fragment>
@@ -33,9 +33,10 @@ class SingleBook extends React.Component {
 							<img src={book.volumeInfo.imageLinks.smallThumbnail} />
 							<div className="book-info-head" >
 								<h1>{this.state.book.volumeInfo.title}</h1>
+								<p></p>
 								<ul>
 									<li>NOTE</li>
-									<li onClick={this.toggle}><button> <i className={active ? 'icon icon-like-red' : 'icon icon-like'} ></i>LIKE</button></li>
+									<li onClick={this.toggle}><button> <i className={active ? 'icon icon-like-red' : 'icon icon-like'} ></i> LIKE</button></li>
 									<li>Write </li>
 								</ul>
 							</div>
@@ -43,12 +44,21 @@ class SingleBook extends React.Component {
 						</div>
 						</header>
 						<div className="l-container">
-							<div className="book-content">
+
+							
+						<div id="book-content">
+							<ul>
+								<li>Price : {book.saleInfo.listPrice.amount} Euros</li>
+								<li>Release Date: {book.volumeInfo.publishedDate}</li>
+								<li>Genre : {book.volumeInfo.categories} </li>
+								<li>Author : {book.volumeInfo.authors}</li>
+							</ul>
 								{this.state.book.volumeInfo.description}
 							</div>
 						</div>
 					</Fragment>
 					}
+					
 			</Fragment>
 
         );
