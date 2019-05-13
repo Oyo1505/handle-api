@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
-import CircularProgressbar from 'react-circular-progressbar';
 import {  Link } from "react-router-dom";
-import 'react-circular-progressbar/dist/styles.css';
+
 
 
 class SingleBook extends React.Component {
