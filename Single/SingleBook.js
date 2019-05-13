@@ -1,5 +1,9 @@
 import React, { Fragment } from 'react';
+import CircularProgressbar from 'react-circular-progressbar';
 import {  Link } from "react-router-dom";
+import 'react-circular-progressbar/dist/styles.css';
+
+
 class SingleBook extends React.Component {
 
 
@@ -40,9 +44,15 @@ class SingleBook extends React.Component {
 								<h1>{this.state.book.volumeInfo.title}</h1>
 								<p></p>
 								<ul>
-									<li>NOTE</li>
-									<li onClick={this.toggle}><button> <i className={active ? 'icon icon-like-red' : 'icon icon-like'} ></i> Like</button></li>
-									<li> <button><i className='icon icon-edit' ></i> Write </button></li>
+									<li className="item-rating-header">
+									{this.state.book.volumeInfo.averageRating &&
+										
+										<span> {this.state.book.volumeInfo.averageRating}/5</span>
+									
+									}
+									</li>
+									<li className="item-header-content" onClick={this.toggle}><button> <i className={active ? 'icon icon-like-red' : 'icon icon-like'} ></i> Like</button></li>
+									<li className="item-header-content"> <button><i className='icon icon-edit' ></i> Write </button></li>
 								</ul>
 							</div>
 							<div className='clear'></div>
