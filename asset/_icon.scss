@@ -154,17 +154,24 @@ $icon-layout : smart;
 }
 
 .icon-like {
-    height: 24px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
     background-image: url('../../images/icon/like.png');
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .icon-like-red {
-    height: 24px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
     background-image: url('../../images/icon/like-red.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.icon-edit {
+    height: 20px;
+    width: 20px;
+    background-image: url('../../images/icon/edit.png');
     background-repeat: no-repeat;
     background-position: center;
 }

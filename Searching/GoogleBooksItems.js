@@ -11,7 +11,7 @@ export default class GoogleBooksItems extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { name: 'books' }
+        this.state = { name: 'books', id: null, }
     }
 
     render() {
@@ -52,8 +52,8 @@ export default class GoogleBooksItems extends React.Component {
 					      			books.map(book => (
 					      				<Fragment>
 							            <animated.div style={props} className="items-results">
-						            		<Link to={`/book/${book.id}`}>	
-						            			<GoogleBook key={book.id} volume={book.volumeInfo}  />
+						            		<Link to={{pathname:`/book/${book.id}`, state : { id: book.id  } }}>	
+						            			<GoogleBook key={`${book.id}_100`} volume={book.volumeInfo}  />
 						            		</Link>	
 						            	
 						           	 </animated.div>

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-
+import {  Link } from "react-router-dom";
 class SingleBook extends React.Component {
 
 
@@ -8,20 +8,25 @@ class SingleBook extends React.Component {
         this.state = { book: [], active: false }
     }
 
-    componentWillMount = () => {
-        fetch(`https://www.googleapis.com/books/v1/volumes/${this.props.match.params.id}?key=AIzaSyAlN3r_xXHhgpuwYTYFcl4c3kKZJc6rXTY`)
-            .then(response => response.json())
-            .then(json => this.setState({ book: json, }));
-    }
+    componentDidMount = async () => {
 
+        const id_book = this.props.match.params.id;
+
+        const req = await fetch(`https://www.googleapis.com/books/v1/volumes/${id_book}?key=AIzaSyAlN3r_xXHhgpuwYTYFcl4c3kKZJc6rXTY`)
+
+        const res = await req.json();
+        this.setState({book: res});
+
+
+    }
     toggle = () => {
-    	this.setState({active : !this.state.active})
+        this.setState({ active: !this.state.active })
     }
 
     render() {
         const book = this.state.book;
-        const active = this.state.active	
-    
+        const active = this.state.active
+
         return (
 
             <Fragment>
@@ -36,8 +41,8 @@ class SingleBook extends React.Component {
 								<p></p>
 								<ul>
 									<li>NOTE</li>
-									<li onClick={this.toggle}><button> <i className={active ? 'icon icon-like-red' : 'icon icon-like'} ></i> LIKE</button></li>
-									<li>Write </li>
+									<li onClick={this.toggle}><button> <i className={active ? 'icon icon-like-red' : 'icon icon-like'} ></i> Like</button></li>
+									<li> <button><i className='icon icon-edit' ></i> Write </button></li>
 								</ul>
 							</div>
 							<div className='clear'></div>
@@ -48,6 +53,11 @@ class SingleBook extends React.Component {
 							
 						<div id="book-content">
 							<ul>
+								<li>
+									<Link to='/search-app'>
+									 	Retour
+									</Link>
+								</li>
 								<li>Price : {book.saleInfo.listPrice.amount} Euros</li>
 								<li>Release Date: {book.volumeInfo.publishedDate}</li>
 								<li>Genre : {book.volumeInfo.categories} </li>
@@ -58,7 +68,7 @@ class SingleBook extends React.Component {
 						</div>
 					</Fragment>
 					}
-					
+
 			</Fragment>
 
         );
