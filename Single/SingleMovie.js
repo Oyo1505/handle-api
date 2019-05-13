@@ -26,11 +26,11 @@ class SingleMovie extends Component {
 
     }
     getFormatDate(){
-
+    	//TODO
     } 
 
     getFormatMoney(){
-
+    	//TODO
     }
     componentWillMount() {
         //console.log(window.location.pathname); //yields: "/js" (where snippets run)
@@ -49,10 +49,10 @@ class SingleMovie extends Component {
 
     }
     render() {
-        const { show, video, casting } = this.state;
+        const { show, video, casting, toggle } = this.state;
         let actorsList;
         let crewList;
-        console.log(show, video)
+   
         //console.log(window.location.pathname); //yields: "/js" (where snippets run)
         //console.log(window.location.href);
         if (casting) {
@@ -95,10 +95,10 @@ class SingleMovie extends Component {
 						
 									
 								<Header  background={show.backdrop_path} title={show.original_title} />
-								<a href="/search-app"> Retour </a>
+									<a className="btn btn-back" href="/search-app"> <i className="icon icon-back"></i> Retour </a>
 								<div className='l-container'>
 								<Spring
-								config={config.slow}
+								config={config.stiff}
 						        from={{ marginLeft: -90, opacity: 0 }}
      							to={{ marginLeft: 0, opacity: 1 }}
 								>
@@ -115,6 +115,8 @@ class SingleMovie extends Component {
 																<li id="circle-movie" ><CircularProgressbar  text={`${show.vote_average * 10 }% `}   percentage={show.vote_average * 10 } styles={{ path: {transition: 'stroke-dashoffset 0.3s ease 0s',}, background: { fill: '#000', }, color: '#000' }} strokeWidth="8"/></li>
 																<li><a href={show.homepage}>Official Website</a></li>
 																<li><a href={`https://www.youtube.com/watch?v=${video.results[0].key}`}><i className='icon icon-play'></i> Play trailer</a></li>
+																<li className="item-header-content" onClick={this.toggle}><button> <i className={toggle ? 'icon icon-like-red' : 'icon icon-like'} ></i> Like</button></li>
+																<li className="item-header-content"> <button><i className='icon icon-edit' ></i> Write </button></li>
 															</Fragment>
 														}
 																												

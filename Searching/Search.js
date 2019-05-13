@@ -90,7 +90,7 @@ class Search extends React.Component {
 							</Form>
 						<br />
 								{this.state.select && 
-									<button className="btn-filter">{this.state.select} <span onClick={this.deleteFilter}>X</span> </button>
+									<button className="btn-filter">{this.state.select} <span onClick={this.deleteFilter}>x</span> </button>
 								}
 
 

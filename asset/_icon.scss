@@ -232,7 +232,14 @@ $icon-layout : smart;
     background-repeat: no-repeat;
     background-position: center;
 }
-
+.icon-back {
+    height: 20px;
+    width: 20px;
+    background-image: url('../../images/icon/left-arrow.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 10px;
+}
 .icon-play-soundbox {
     float: right;
 }
