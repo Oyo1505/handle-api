@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Spring, animated, config } from 'react-spring/renderprops';
+import moment from 'moment';
+import VideosItems from '../Searching/VideosItems';
+import Review from '../Searching/Review';
 import CircularProgressbar from 'react-circular-progressbar';
 import Header from '../../containers/Header';
 import styled from 'styled-components';
@@ -15,8 +18,9 @@ class SingleMovie extends Component {
             video: null,
             casting: null,
             toggle: false,
+            active:false,
         }
-        this.getFormatDate = this.getFormatDate.bind(this)
+
         this.getFormatMoney = this.getFormatMoney.bind(this)
         this.toggle = this.toggle.bind(this)
     }
@@ -25,16 +29,18 @@ class SingleMovie extends Component {
         this.setState({ toggle: !this.state.toggle });
 
     }
-    getFormatDate(){
-    	//TODO
-    } 
 
     getFormatMoney(){
     	//TODO
     }
+    displayVideos = () =>{
+    	this.setState({ active : !this.state.active})
+    }
     componentWillMount() {
         //console.log(window.location.pathname); //yields: "/js" (where snippets run)
-        console.log(this.props.match.url); //yields: "https://stacksnippets.net/js"
+         //yields: "https://stacksnippets.net/js"
+
+         /*get the show info*/
         fetch(`https://api.themoviedb.org/3${this.props.match.url}?api_key=d62acee627fa0503830a6e257e522480&language=en-US`)
             .then(response => response.json())
             .then(json => this.setState({ show: json }));
@@ -43,6 +49,7 @@ class SingleMovie extends Component {
             .then(response => response.json())
             .then(json => this.setState({ video: json }));
 
+         /*Casting json*/   
         fetch(`https://api.themoviedb.org/3${this.props.match.url}/credits?api_key=d62acee627fa0503830a6e257e522480`)
             .then(response => response.json())
             .then(json => this.setState({ casting: json }));
@@ -121,7 +128,7 @@ class SingleMovie extends Component {
 														}
 																												
 													</ul>
-													<div className="clear"></div>
+											
 												</span>
 												<div className="overview">
 													<h5>Overview</h5>
@@ -138,8 +145,8 @@ class SingleMovie extends Component {
 												<h3>Infos</h3>
 													<div className="info-technic">
 														<ul>
-															<li> Budget : {show.budget === 0 && <span> Nothing to show</span>}{show.budget > 0 && show.budget } $ </li>
-															<li> Realse : {show.release_date}</li>
+															<li>Budget : {show.budget === 0 && <span> Nothing to show</span>}{show.budget > 0 && show.budget } $ </li>
+															<li>Release : {moment( show.release_date).format('YYYY')}</li>
 															<li>Genre : {show.genres.map(genre => (
 																	 <span> {genre.name } </span> 
 																))}
@@ -158,26 +165,33 @@ class SingleMovie extends Component {
 												</ul>	
 										</div>
 										</section>
+
 									</Fragment>
 								 )									
 								}
 								</Spring>
+									<Review />
 									<section className="section-video">
 
-										<p>suggestion video</p> <button onClick={this.toggle}> afficher </button><br />
-										{!video.results &&
-											<p>Pas de video disponible pour ce film</p>
+										<h4 className="item-section-video">Suggestion video</h4> <button className='btn item-section-video' onClick={this.displayVideos} style={{ transform: this.state.active ? 'rotate(90deg)' : 'rotate(0)', transitionDuration: '0.50s'  }} ><i className="icon icon-double-arrow"></i>  </button><br />
+										<Spring
+										config={config.slow}
+										from={{height: 0, opacity: 0}}
+										to={{ height: this.state.active ? '300' : '0', opacity: this.state.active ? 1 : 0  }}
+										>	
+										{props => 
+											<Fragment>
+											<div style={props}>
+												 <VideosItems video={video}  active={this.displayVideos} />
+											</div>
+												
+												</Fragment>
+											
 										}
-										{video.results.map(vid => (	
-											<iframe width="280"
-											 height="157" 
-											 src={`https://www.youtube.com/embed/${vid.key}`} 
-											 frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-											 allowFullScreen>
-											</iframe>))}
+										</Spring>
 									</section>
 									</div>
-									<aside>social media</aside>
+									<aside id="social-media">social media</aside>
 								</Fragment>
 
 							 }

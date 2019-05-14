@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-
+import moment from 'moment';
 import logoT from '../../images/tetris.jpg';
 
 export default class GoogleBook extends React.Component {
@@ -27,9 +27,10 @@ export default class GoogleBook extends React.Component {
 						Auteur: {this.props.volume.authors}<br/>
 						Editeur: {this.props.volume.publisher}<br/>
 						Genre: {this.props.volume.categories}<br/>
-						<span>publié en {this.props.volume.publishedDate} </span><br/>
+						<span>Publié en {moment(this.props.volume.publishedDate).format('YYYY')} </span><br/>
 					</p>
 
+					{this.props.volume.averageRating}/5
 
 				</div>
 				<div className="clear"></div>

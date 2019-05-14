@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import moment from 'moment';
 import {  Link } from "react-router-dom";
 
 
@@ -63,12 +64,12 @@ class SingleBook extends React.Component {
 						<div id="book-content">
 							<ul>
 								<li>
-									<Link to='/search-app'>
-									 	Retour
+									<Link to='/search-app' className="btn btn-back">
+									  <i className="icon icon-back"></i>	Retour
 									</Link>
 								</li>
 								<li>Price : {book.saleInfo.listPrice.amount} Euros</li>
-								<li>Release Date: {book.volumeInfo.publishedDate}</li>
+								<li>Release Date: {moment(book.volumeInfo.publishedDate).format('YYYY')}</li>
 								<li>Genre : {book.volumeInfo.categories} </li>
 								<li>Author : {book.volumeInfo.authors}</li>
 							</ul>
