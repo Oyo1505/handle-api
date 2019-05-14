@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { Trail, animated, config } from 'react-spring/renderprops';
 class VideosItems extends Component {
 
@@ -19,25 +19,35 @@ class VideosItems extends Component {
 
 	const video = this.props.video
     return (
-        <div>
+        <Fragment>
 	    	
 	    	{!video.results &&
 				<p>Pas de video disponible pour ce film</p>
 			}
 			{video.results.map(vid => (	
-				<iframe 
-				  className="video-single-movie"
-				  width="280"
-				  height="157" 
-				  src={`https://www.youtube.com/embed/${vid.key}`} 
-				  frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-				  allowFullScreen>
-				</iframe>))
+				<div className="box-i" >
+					
+					<iframe 
+						className="one"				 
+					  src={`https://www.youtube.com/embed/${vid.key}`} 
+					  frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+					  allowFullScreen>
+					</iframe>
+
+				</div>
+				))
 			}
 
-    </div>
+    </Fragment>
     )
 }
 }
 
 export default VideosItems;
+
+/*<iframe style={{height: '269px', width: '447px'}}
+										 
+					  src={`https://www.youtube.com/embed/${vid.key}`} 
+					  frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+					  allowFullScreen>
+					</iframe>*/
