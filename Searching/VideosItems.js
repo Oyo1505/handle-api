@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import { Trail, animated, config } from 'react-spring/renderprops';
+
 class VideosItems extends Component {
 
 	constructor(props){
@@ -25,14 +26,14 @@ class VideosItems extends Component {
 				<p>Pas de video disponible pour ce film</p>
 			}
 			{video.results.map(vid => (	
-				<div className="box-i" >
+				<div  className="item-video" >
 					
-					<iframe 
-						className="one"				 
+					<embed 
+					  
+					  className='testH'			 
 					  src={`https://www.youtube.com/embed/${vid.key}`} 
-					  frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-					  allowFullScreen>
-					</iframe>
+					  allowFullScreen />
+					
 
 				</div>
 				))

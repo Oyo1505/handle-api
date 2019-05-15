@@ -171,8 +171,20 @@
     font-weight: bold;
     color: #000;
 }
+/*Review*/
+#reviews{
+    padding: 0;
+}
 
+.review-content{
+    margin-top: 20px;
+    margin-left: 30px;
+}
 /*HORIZONTAL SCROLL*/
+    .section-video{
+        padding: 0;
+  
+}
 #container-test .box-i {
   width:36%;
   height: calc(50vh - 209px);
@@ -192,7 +204,7 @@
   line-height:.7;
   font-weight:bold;
   margin-right: 10px;
-}*/
+}
 #container-test {
   overflow-y:scroll;
   overflow-x:hidden;
@@ -201,6 +213,7 @@
   position:absolute;
   width: 83%;
   height:65%;
+
 }
 #container2 {
   transform: rotate(90deg) translateY(-100vh);
@@ -208,15 +221,13 @@
   white-space:nowrap;
   font-size:0;
 }
-.one {
-      width: 100%;
-      height: 100%;
-}
-.two {
-  background-color: #49E83E;
-}
-.three {
-  background-color: #EDDE05;
+
+*/
+.testH{
+
+         overflow-y:scroll;
+            overflow-x:hidden;
+
 }
 @media only screen and (min-width: 768px) {
     .filters-search {
@@ -241,6 +252,7 @@
 
         right: 0;
     }
+
     /*BOOK SINGLE PAGE*/
     #book-header{
         vertical-align: middle;
@@ -272,6 +284,7 @@
         }
     }
     /*single movie page*/
+
     .movie-detail {
         .header-action {
             li {
@@ -317,17 +330,26 @@
         }
     }
     .section-video{
-        border: solid 1px #000;
-        .video-single-movie{
-            margin-right: 10px;
-        }
-
+        
 
     }
-
-
+    .btn-video{
+       
+        /*border:1px #000 solid;*/
+    } 
+    .item-video{
+       
+        margin-top: 10px;
+        margin-right: 10px;
+        
+    }
+    .guillemet{
+        font-size: 1em;
+        font-weight: bold;
+    }
+    .author{right: 0}
     .item-section-video{
-        display: inline-block;
+       display: inline-block;
         margin-top: 10px;
         margin-bottom: 10px;
     }

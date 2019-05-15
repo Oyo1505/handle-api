@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Spring, animated, config } from 'react-spring/renderprops';
+import HorizontalScroll from 'react-scroll-horizontal';
 import moment from 'moment';
 import VideosItems from '../Searching/VideosItems';
 import Review from '../Searching/Review';
@@ -59,7 +60,8 @@ class SingleMovie extends Component {
         const { show, video, casting, toggle } = this.state;
         let actorsList;
         let crewList;
-   
+   		const child = { width: `400em`, height: `100%`,};
+   		 const parent  = { width: `60em`, height: `100%`}
         //console.log(window.location.pathname); //yields: "/js" (where snippets run)
         //console.log(window.location.href);
         if (casting) {
@@ -133,7 +135,6 @@ class SingleMovie extends Component {
 												<div className="overview">
 													<h5>Overview</h5>
 													<p>{show.overview}</p>
-													
 												</div>
 												<h3>Featured Crew</h3>
 													<div className="team-technic">
@@ -146,7 +147,7 @@ class SingleMovie extends Component {
 													<div className="info-technic">
 														<ul>
 															<li>Budget : {show.budget === 0 && <span> Nothing to show</span>}{show.budget > 0 && show.budget } $ </li>
-															<li>Release : {moment( show.release_date).format('YYYY')}</li>
+															<li>Release : {moment(show.release_date).format('YYYY')}</li>
 															<li>Genre : {show.genres.map(genre => (
 																	 <span> {genre.name } </span> 
 																))}
@@ -171,27 +172,34 @@ class SingleMovie extends Component {
 								}
 								</Spring>
 									<Review />
-									<section className="section-video">
+									<section className="section-video ">
 
-										<h4 className="item-section-video">Suggestion video</h4> <button className='btn item-section-video' onClick={this.displayVideos} style={{ transform: this.state.active ? 'rotate(90deg)' : 'rotate(0)', transitionDuration: '0.50s'  }} ><i className="icon icon-double-arrow"></i>  </button><br />
+										<h4 className="item-section-video">Suggestion video</h4> <button className='btn btn-video' onClick={this.displayVideos} style={{ transform: this.state.active ? 'rotate(0deg)' : 'rotate(-90deg)', transitionDuration: '0.50s'  }} ><i className="icon icon-double-arrow"></i>  </button><br />
 										<Spring
 										config={config.slow}
 										from={{height: 0, opacity: 0}}
-										to={{ height: this.state.active ? '300' : '0', opacity: this.state.active ? 1 : 0  }}
+										to={{ height: this.state.active ? '200' : '0', opacity: this.state.active ? 1 : 0  }}
 										>	
 										{props => 
 											<Fragment>
-											<div style={props}>
-												 <VideosItems video={video}  active={this.displayVideos} />
+												<div style={props}  >
+												<div style={parent}>
+												<HorizontalScroll>
+													
+														<VideosItems style={child} video={video}  active={this.displayVideos} />
+													
+												</HorizontalScroll>
 											</div>
-												
-												</Fragment>
+											</div>		
+											</Fragment>
 											
 										}
 										</Spring>
 									</section>
 									</div>
-									<aside id="social-media">social media</aside>
+									<aside id="social-media">
+										
+									</aside>
 								</Fragment>
 
 							 }
@@ -204,3 +212,11 @@ class SingleMovie extends Component {
 }
 
 export default SingleMovie;
+/*<VideosItems video={video}  active={this.displayVideos} />
+
+<div className="box-i one"><div>1</div></div>
+<div id="container-test" >
+													<div  id="container2"  >
+													</div>
+												</div>
+*/
