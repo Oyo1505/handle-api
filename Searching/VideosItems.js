@@ -19,6 +19,7 @@ class VideosItems extends Component {
 
 
 	const video = this.props.video
+	const child = this.props.child
     return (
         <Fragment>
 	    	
@@ -26,7 +27,7 @@ class VideosItems extends Component {
 				<p>Pas de video disponible pour ce film</p>
 			}
 			{video.results.map(vid => (	
-				<div  className="item-video" >
+				<div  className="item-video" style={child} >
 					
 					<embed 
 					  

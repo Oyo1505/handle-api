@@ -55,9 +55,9 @@ class Review extends React.Component {
 export default Review;
 
 
-Review.propTypes = {
+/*Review.propTypes = {
     id : PropTypes.int,
     name: PropTypes.string,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
 
-}
+}*/

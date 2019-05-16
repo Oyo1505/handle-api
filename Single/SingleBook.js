@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
-import moment from 'moment';
 import {  Link } from "react-router-dom";
+import moment from 'moment';
+import Review from '../Searching/Review';
+
 
 
 
@@ -75,7 +77,10 @@ class SingleBook extends React.Component {
 							</ul>
 								{this.state.book.volumeInfo.description}
 							</div>
+
+							<Review />
 						</div>
+						
 					</Fragment>
 					}
 

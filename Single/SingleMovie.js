@@ -61,9 +61,8 @@ class SingleMovie extends Component {
         let actorsList;
         let crewList;
    		const child = { width: `400em`, height: `100%`,};
-   		 const parent  = { width: `60em`, height: `100%`}
-        //console.log(window.location.pathname); //yields: "/js" (where snippets run)
-        //console.log(window.location.href);
+   		const parent  = { width: `60em`, height: `500px`}
+      	console.log(show);
         if (casting) {
 
             actorsList = casting.cast.map((actor, i) => {
@@ -171,7 +170,9 @@ class SingleMovie extends Component {
 								 )									
 								}
 								</Spring>
+
 									<Review />
+									
 									<section className="section-video ">
 
 										<h4 className="item-section-video">Suggestion video</h4> <button className='btn btn-video' onClick={this.displayVideos} style={{ transform: this.state.active ? 'rotate(0deg)' : 'rotate(-90deg)', transitionDuration: '0.50s'  }} ><i className="icon icon-double-arrow"></i>  </button><br />
@@ -182,14 +183,14 @@ class SingleMovie extends Component {
 										>	
 										{props => 
 											<Fragment>
-												<div style={props}  >
-												<div style={parent}>
+												<div style={props} >
+												
 												<HorizontalScroll>
 													
-														<VideosItems style={child} video={video}  active={this.displayVideos} />
+														<VideosItems scroll={child} video={video}  active={this.displayVideos} />
 													
 												</HorizontalScroll>
-											</div>
+											
 											</div>		
 											</Fragment>
 											

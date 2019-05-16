@@ -234,6 +234,12 @@
         float: left;
         width: 15%;
         padding-left: 10px;
+        .search-item-filters{
+            justify-content: center;
+            height: 32px;
+           letter-spacing: 0.3em;
+           
+        }
     }
 
     .items-results {
