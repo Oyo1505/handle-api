@@ -23,7 +23,6 @@ class Review extends React.Component {
     }
     render() {
         const user = this.state.fakeUser;
-        console.log(this.state.name)
         return (
             <section id="reviews">
 					<div>	

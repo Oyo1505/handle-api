@@ -32,7 +32,7 @@ class SingleBook extends React.Component {
     render() {
         const book = this.state.book;
         const active = this.state.active
-
+       
         return (
 
             <Fragment>
@@ -70,7 +70,13 @@ class SingleBook extends React.Component {
 									  <i className="icon icon-back"></i>	Retour
 									</Link>
 								</li>
-								<li>Price : {book.saleInfo.listPrice.amount} Euros</li>
+								<li>Price : {!book.saleInfo.listPrice &&
+
+												<span>Info Non Disponible</span>
+											}
+											{book.saleInfo.listPrice &&
+												<span>{book.saleInfo.listPrice.amount} Euros</span>
+											} </li>
 								<li>Release Date: {moment(book.volumeInfo.publishedDate).format('YYYY')}</li>
 								<li>Genre : {book.volumeInfo.categories} </li>
 								<li>Author : {book.volumeInfo.authors}</li>

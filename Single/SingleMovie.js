@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Spring, animated, config } from 'react-spring/renderprops';
+import imageDefault from '../../images/film-default.png';
 import HorizontalScroll from 'react-scroll-horizontal';
 import moment from 'moment';
 import VideosItems from '../Searching/VideosItems';
@@ -61,8 +62,7 @@ class SingleMovie extends Component {
         let actorsList;
         let crewList;
    		const child = { width: `400em`, height: `100%`,};
-   		const parent  = { width: `60em`, height: `500px`}
-      	console.log(show);
+   		const parent  = { width: `60em`, height: `500px`};
         if (casting) {
 
             actorsList = casting.cast.map((actor, i) => {
@@ -101,8 +101,13 @@ class SingleMovie extends Component {
 							{show !== null && video !== null &&
 								<Fragment>
 						
-									
-								<Header  background={show.backdrop_path} title={show.original_title} />
+								{show.backdrop_path &&
+									<Header  background={show.backdrop_path} title={show.original_title} />
+								}
+								{!show.backdrop_path && 
+									<Header   title={show.original_title} />
+								}
+								
 									<a className="btn btn-back" href="/search-app"> <i className="icon icon-back"></i> Retour </a>
 								<div className='l-container'>
 								<Spring
@@ -114,7 +119,13 @@ class SingleMovie extends Component {
 									<Fragment>
 										<section style={props} className="movie-detail">
 										<div>
-											<img className="poster" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${show.poster_path}`} width='300px' height="450px" />
+											{show.poster_path &&
+												<img className="poster" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${show.poster_path}`} width='300px' height="450px" />
+											}
+											{!show.poster_path &&
+												<img className="poster" src={imageDefault} width='300px' height="450px" />
+											}	
+											
 											<div className="info-wrapper">
 												<span> 
 													<ul className="header-action">
@@ -122,7 +133,9 @@ class SingleMovie extends Component {
 															<Fragment>
 																<li id="circle-movie" ><CircularProgressbar  text={`${show.vote_average * 10 }% `}   percentage={show.vote_average * 10 } styles={{ path: {transition: 'stroke-dashoffset 0.3s ease 0s',}, background: { fill: '#000', }, color: '#000' }} strokeWidth="8"/></li>
 																<li><a href={show.homepage}>Official Website</a></li>
-																<li><a href={`https://www.youtube.com/watch?v=${video.results[0].key}`}><i className='icon icon-play'></i> Play trailer</a></li>
+																{video.results[0] &&
+																	<li><a href={`https://www.youtube.com/watch?v=${video.results[0].key}`}><i className='icon icon-play'></i> Play trailer</a></li>	
+																}	
 																<li className="item-header-content" onClick={this.toggle}><button> <i className={toggle ? 'icon icon-like-red' : 'icon icon-like'} ></i> Like</button></li>
 																<li className="item-header-content"> <button><i className='icon icon-edit' ></i> Write </button></li>
 															</Fragment>
@@ -185,10 +198,12 @@ class SingleMovie extends Component {
 											<Fragment>
 												<div style={props} >
 												
-												<HorizontalScroll>
+												<HorizontalScroll 
+												className="idée"
+												>
 													
-														<VideosItems scroll={child} video={video}  active={this.displayVideos} />
-													
+														<VideosItems style={child}  video={video}  active={this.displayVideos} />
+												
 												</HorizontalScroll>
 											
 											</div>		
