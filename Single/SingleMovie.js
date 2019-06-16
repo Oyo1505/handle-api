@@ -43,16 +43,16 @@ class SingleMovie extends Component {
          //yields: "https://stacksnippets.net/js"
 
          /*get the show info*/
-        fetch(`https://api.themoviedb.org/3${this.props.match.url}?api_key=d62acee627fa0503830a6e257e522480&language=en-US`)
+        fetch(`https://api.themoviedb.org/3${this.props.match.url}?api_key=API_KEY&language=en-US`)
             .then(response => response.json())
             .then(json => this.setState({ show: json }));
 
-        fetch(`https://api.themoviedb.org/3${this.props.match.url}/videos?api_key=d62acee627fa0503830a6e257e522480&language=en-US`)
+        fetch(`https://api.themoviedb.org/3${this.props.match.url}/videos?api_key=API_KEY&language=en-US`)
             .then(response => response.json())
             .then(json => this.setState({ video: json }));
 
          /*Casting json*/   
-        fetch(`https://api.themoviedb.org/3${this.props.match.url}/credits?api_key=d62acee627fa0503830a6e257e522480`)
+        fetch(`https://api.themoviedb.org/3${this.props.match.url}/credits?api_key=API_KEY`)
             .then(response => response.json())
             .then(json => this.setState({ casting: json }));
 
