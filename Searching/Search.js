@@ -30,12 +30,12 @@ class Search extends React.Component {
         this.setState({ search: e.target.value, isFetching: true, });
 
 
-        fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}&key=AIzaSyAlN3r_xXHhgpuwYTYFcl4c3kKZJc6rXTY`)
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}&key=API_KEY`)
             .then(response => response.json())
             .then(json => this.setState({ books: json, isFetching: false, }));
 
 
-        fetch(`https://api.themoviedb.org/3/search/movie?api_key=d62acee627fa0503830a6e257e522480&query=${value}`)
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=API_KEY&query=${value}`)
             .then(response => response.json())
             .then(json => this.setState({ movies: json, isFetching: false, }));
 
