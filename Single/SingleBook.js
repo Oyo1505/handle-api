@@ -18,7 +18,7 @@ class SingleBook extends React.Component {
 
         const id_book = this.props.match.params.id;
 
-        const req = await fetch(`https://www.googleapis.com/books/v1/volumes/${id_book}?key=API_KEY`)
+        const req = await fetch(`https://www.googleapis.com/books/v1/volumes/${id_book}?key=AIzaSyAlN3r_xXHhgpuwYTYFcl4c3kKZJc6rXTY`)
 
         const res = await req.json();
         this.setState({book: res});
@@ -41,7 +41,7 @@ class SingleBook extends React.Component {
 					
 					<header id="book-header">
 						<div className="l-container">
-							<img src={book.volumeInfo.imageLinks.smallThumbnail} />
+							<img src={book.volumeInfo.imageLinks.smallThumbnail} alt="thumbnail-book"/>
 							<div className="book-info-head" >
 								<h1>{this.state.book.volumeInfo.title}</h1>
 								<p></p>

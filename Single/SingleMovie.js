@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Spring, animated, config } from 'react-spring/renderprops';
+import { Spring, config } from 'react-spring/renderprops';
 import imageDefault from '../../images/film-default.png';
 import HorizontalScroll from 'react-scroll-horizontal';
 import moment from 'moment';
@@ -7,7 +7,6 @@ import VideosItems from '../Searching/VideosItems';
 import Review from '../Searching/Review';
 import CircularProgressbar from 'react-circular-progressbar';
 import Header from '../../containers/Header';
-import styled from 'styled-components';
 import 'react-circular-progressbar/dist/styles.css';
 
 
@@ -43,16 +42,16 @@ class SingleMovie extends Component {
          //yields: "https://stacksnippets.net/js"
 
          /*get the show info*/
-        fetch(`https://api.themoviedb.org/3${this.props.match.url}?api_key=API_KEY&language=en-US`)
+        fetch(`https://api.themoviedb.org/3${this.props.match.url}?api_key=d62acee627fa0503830a6e257e522480&language=en-US`)
             .then(response => response.json())
             .then(json => this.setState({ show: json }));
 
-        fetch(`https://api.themoviedb.org/3${this.props.match.url}/videos?api_key=API_KEY&language=en-US`)
+        fetch(`https://api.themoviedb.org/3${this.props.match.url}/videos?api_key=d62acee627fa0503830a6e257e522480&language=en-US`)
             .then(response => response.json())
             .then(json => this.setState({ video: json }));
 
          /*Casting json*/   
-        fetch(`https://api.themoviedb.org/3${this.props.match.url}/credits?api_key=API_KEY`)
+        fetch(`https://api.themoviedb.org/3${this.props.match.url}/credits?api_key=d62acee627fa0503830a6e257e522480`)
             .then(response => response.json())
             .then(json => this.setState({ casting: json }));
 
@@ -120,10 +119,10 @@ class SingleMovie extends Component {
 										<section style={props} className="movie-detail">
 										<div>
 											{show.poster_path &&
-												<img className="poster" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${show.poster_path}`} width='300px' height="450px" />
+												<img className="poster" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${show.poster_path}`} alt="poster movie" width='300px' height="450px" />
 											}
 											{!show.poster_path &&
-												<img className="poster" src={imageDefault} width='300px' height="450px" />
+												<img className="poster" src={imageDefault} width='300px' height="450px" alt="poster default"/>
 											}	
 											
 											<div className="info-wrapper">
@@ -228,11 +227,3 @@ class SingleMovie extends Component {
 }
 
 export default SingleMovie;
-/*<VideosItems video={video}  active={this.displayVideos} />
-
-<div className="box-i one"><div>1</div></div>
-<div id="container-test" >
-													<div  id="container2"  >
-													</div>
-												</div>
-*/
