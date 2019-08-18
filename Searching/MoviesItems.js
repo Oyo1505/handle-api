@@ -20,7 +20,6 @@ class MoviesItems extends Component {
     }
 
     render() {
-        const { toggle } = this.state;
         const { movies, select } = this.props
 
         return (
@@ -50,7 +49,7 @@ class MoviesItems extends Component {
                      <br />
                     <Spring
                           native
-                          config={config.molasses}
+                          config={config.stiff}
                           from={{ opacity: 0 }} 
                           to={{ opacity: 1 }} delay= '500'
                           >

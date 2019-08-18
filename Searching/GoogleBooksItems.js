@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Col } from 'react-bootstrap';
 import { Spring, animated, config } from 'react-spring/renderprops';
 import GoogleBook from './GoogleBook';
 import { Link } from 'react-router-dom';
@@ -43,7 +42,7 @@ export default class GoogleBooksItems extends React.Component {
 		        		<br />
 		            <Spring
 					          native
-					          config={config.molasses}
+					          config={config.stiff}
 					          from={{ opacity: 0 }} 
 					          to={{ opacity: 1 }}
 					          delay= '500'

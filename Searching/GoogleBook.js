@@ -4,21 +4,18 @@ import logoT from '../../images/tetris.jpg';
 
 export default class GoogleBook extends React.Component {
 
-    constructor(props) {
-        super(props);
 
-    }
 
     render() {
         return (
             <Fragment>
 				{this.props.volume.imageLinks &&
 
-					<img src={this.props.volume.imageLinks.thumbnail} width="128px" height="207px" />
+					<img src={this.props.volume.imageLinks.thumbnail} width="128px" height="207px" alt="thumbnail book " />
 						
 				}
 				{!this.props.volume.imageLinks &&
-					<img src={logoT} width="128px" height="207px" />
+					<img src={logoT} width="128px" height="207px" alt="logo default book" />
 
 				}
 				<div className="items-list-info">

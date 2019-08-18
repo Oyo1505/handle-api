@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 class Review extends React.Component {
@@ -13,16 +13,8 @@ class Review extends React.Component {
                     review: "",
                 }
     }
-    componentWillMount = () => {
-        /*this.setState({
-               
-                    id: 1234,
-                    name: '0yy0',
-                
-        })*/
-    }
+  
     render() {
-        const user = this.state.fakeUser;
         return (
             <section id="reviews">
 					<div>	

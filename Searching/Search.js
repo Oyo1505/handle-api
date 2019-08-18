@@ -1,23 +1,21 @@
 import React, { Fragment } from 'react';
 import Header from '../../containers/Header';
 import FilterItems from './FilterItems';
-import { Form, FormGroup, FormControl, Container, Row, Button } from 'react-bootstrap';
-import Grid from '../Animation/Grid'
+import { Form, FormGroup, FormControl, Container, Row } from 'react-bootstrap';
 import GoogleBooksItems from './GoogleBooksItems';
 import MoviesItems from './MoviesItems';
-import styled from 'styled-components';
-import GoogleLogin from 'react-google-login';
 
 
 class Search extends React.Component {
 
     constructor(props) {
         super(props)
-    
+
         this.state = {
             search: '',
             books: [],
             movies: [],
+            music : [],
             select: null,
             itemsLength: 0,
             isFetching: false,
@@ -30,49 +28,47 @@ class Search extends React.Component {
         this.setState({ search: e.target.value, isFetching: true, });
 
 
-        fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}&key=API_KEY`)
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}&key=AIzaSyAlN3r_xXHhgpuwYTYFcl4c3kKZJc6rXTY`)
             .then(response => response.json())
             .then(json => this.setState({ books: json, isFetching: false, }));
 
 
-        fetch(`https://api.themoviedb.org/3/search/movie?api_key=API_KEY&query=${value}`)
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=d62acee627fa0503830a6e257e522480&query=${value}`)
             .then(response => response.json())
             .then(json => this.setState({ movies: json, isFetching: false, }));
 
     }
-    componentDidMount =() =>{
+    componentDidMount = () => {
 
-    			const json_books = localStorage.getItem("books");
-    			const json_movies = localStorage.getItem("movies");
-    			if(json_books !== null && json_movies !== null){
+        const json_books = localStorage.getItem("books");
+        const json_movies = localStorage.getItem("movies");
+        if (json_books !== null && json_movies !== null) {
 
-    				const books = JSON.parse(json_books);
-    				const movies = JSON.parse(json_movies)
-    				this.setState({ books : books, movies: movies });
-    				
-    			}
+            const books = JSON.parse(json_books);
+            const movies = JSON.parse(json_movies)
+            this.setState({ books: books, movies: movies });
+
+        }
 
     }
     componentDidUpdate = () => {
-    	const books = JSON.stringify(this.state.books);
-    	const movies = JSON.stringify(this.state.movies);
-    	 localStorage.setItem("books", books);
-    	 localStorage.setItem("movies", movies);
-    	
+        const books = JSON.stringify(this.state.books);
+        const movies = JSON.stringify(this.state.movies);
+        localStorage.setItem("books", books);
+        localStorage.setItem("movies", movies);
+
     }
     handleSelect = value => {
-        this.setState({select: value });
+        this.setState({ select: value });
     }
 
-    deleteFilter = (e) =>{
-    	e.preventDefault();
-    	this.setState({select: null})
+    deleteFilter = (e) => {
+        e.preventDefault();
+        this.setState({ select: null })
     }
 
 
     render() {
-        const { validated } = this.state;
-        let resultsSearches = 0;
         
         return (
             <Fragment>	
@@ -81,7 +77,7 @@ class Search extends React.Component {
 				<h4>Filtres</h4>
 				<FilterItems select={this.handleSelect} />
 			</aside>
-				<Container className="continer-api search-block">
+				<Container className="container-api search-block">
 						<div id="search-api">
 							<Form>
 								<FormGroup>
@@ -124,8 +120,9 @@ class Search extends React.Component {
 							</div>	
 						
 							<br />
+
 							<div  id="music-results">
-										<h2>Music</h2>
+										
 										<br />
 										<Row>
 											
