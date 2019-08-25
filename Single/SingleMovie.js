@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Spring, config } from 'react-spring/renderprops';
+import { Modal } from 'react-bootstrap';
+import ReactPlayer from 'react-player';
 import imageDefault from '../../images/film-default.png';
 import HorizontalScroll from 'react-scroll-horizontal';
 import moment from 'moment';
@@ -20,6 +22,7 @@ class SingleMovie extends Component {
             casting: null,
             toggle: false,
             active:false,
+            trailer: false,
         }
 
         this.getFormatMoney = this.getFormatMoney.bind(this)
@@ -56,15 +59,21 @@ class SingleMovie extends Component {
             .then(json => this.setState({ casting: json }));
 
     }
+    showTrailerMovie = () => {
+    	console.log(this.state.trailer)
+    	this.setState({trailer: !this.state.trailer})
+    }
+    handleCloseModal = () => {
+        this.setState({ trailer: !this.state.trailer })
+    }
     render() {
         const { show, video, casting, toggle } = this.state;
         let actorsList;
         let crewList;
    		const child = { width: `400em`, height: `100%`,};
-   		const parent  = { width: `60em`, height: `500px`};
         if (casting) {
 
-            actorsList = casting.cast.map((actor, i) => {
+            actorsList = casting.cast.map((actor) => {
                 if (actor.order <= 4) {
                     return (
                     	<li>
@@ -91,7 +100,7 @@ class SingleMovie extends Component {
         return (
             <Fragment>
 						
-							{show === undefined && 
+							{show === undefined &&  show === null && 
 								<Fragment>
 								<Header />
 									<p>Loading....</p>
@@ -133,7 +142,33 @@ class SingleMovie extends Component {
 																<li id="circle-movie" ><CircularProgressbar  text={`${show.vote_average * 10 }% `}   percentage={show.vote_average * 10 } styles={{ path: {transition: 'stroke-dashoffset 0.3s ease 0s',}, background: { fill: '#000', }, color: '#000' }} strokeWidth="8"/></li>
 																<li><a href={show.homepage}>Official Website</a></li>
 																{video.results[0] &&
-																	<li><a href={`https://www.youtube.com/watch?v=${video.results[0].key}`}><i className='icon icon-play'></i> Play trailer</a></li>	
+																	<Fragment>
+																	<li onClick={this.showTrailerMovie}><i className='icon icon-play'></i> Play trailer</li>
+																		{this.state.trailer &&
+
+									                                    <Modal  
+									                                    style={{'width': '500px'}}
+									                                    size="xl"  
+									                                    aria-labelledby="contained-modal-title-vcenter"
+									                                    centered 
+									                                    
+									                                    onHide={this.handleCloseModal}
+									                                   	show={this.state.trailer}
+									                                    >
+									                                    <Modal.Title className="title-modal-djyoutube"> {show.original_title}</Modal.Title>
+									                                     <Modal.Body className="modal-body-djyoutube">
+									                                        <ReactPlayer 
+															                url={`https://www.youtube.com/watch?v=${video.results[0].key}`}
+															                width='100%'
+															                config={{  youtube: {
+															                     playerVars: { 'showinfo': 1, 'enablejsapi' : 1 }
+															                 }, }}
+															             
+															           		 />
+									                                     </Modal.Body>
+									                                     </Modal>
+									                                     }
+								                                     </Fragment>
 																}	
 																<li className="item-header-content" onClick={this.toggle}><button> <i className={toggle ? 'icon icon-like-red' : 'icon icon-like'} ></i> Like</button></li>
 																<li className="item-header-content"> <button><i className='icon icon-edit' ></i> Write </button></li>
@@ -227,3 +262,4 @@ class SingleMovie extends Component {
 }
 
 export default SingleMovie;
+/*<a href={`https://www.youtube.com/watch?v=${video.results[0].key}`}></a>*/
