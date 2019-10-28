@@ -41,20 +41,17 @@ class SingleMovie extends Component {
     	this.setState({ active : !this.state.active})
     }
     componentWillMount() {
-        //console.log(window.location.pathname); //yields: "/js" (where snippets run)
-         //yields: "https://stacksnippets.net/js"
-
          /*get the show info*/
-        fetch(`https://api.themoviedb.org/3${this.props.match.url}?api_key=d62acee627fa0503830a6e257e522480&language=en-US`)
+        fetch(`https://api.themoviedb.org/3${this.props.match.url}?api_key=${process.env.REACT_APP_MOVIESDB_API_KEY}&language=en-US`)
             .then(response => response.json())
             .then(json => this.setState({ show: json }));
 
-        fetch(`https://api.themoviedb.org/3${this.props.match.url}/videos?api_key=d62acee627fa0503830a6e257e522480&language=en-US`)
+        fetch(`https://api.themoviedb.org/3${this.props.match.url}/videos?api_key=${process.env.REACT_APP_MOVIESDB_API_KEY}&language=en-US`)
             .then(response => response.json())
             .then(json => this.setState({ video: json }));
 
          /*Casting json*/   
-        fetch(`https://api.themoviedb.org/3${this.props.match.url}/credits?api_key=d62acee627fa0503830a6e257e522480`)
+        fetch(`https://api.themoviedb.org/3${this.props.match.url}/credits?api_key=${process.env.REACT_APP_MOVIESDB_API_KEY}`)
             .then(response => response.json())
             .then(json => this.setState({ casting: json }));
 
@@ -147,7 +144,7 @@ class SingleMovie extends Component {
 																		{this.state.trailer &&
 
 									                                    <Modal  
-									                                    style={{'width': '500px'}}
+									       
 									                                    size="xl"  
 									                                    aria-labelledby="contained-modal-title-vcenter"
 									                                    centered 

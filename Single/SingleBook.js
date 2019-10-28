@@ -18,7 +18,7 @@ class SingleBook extends React.Component {
 
         const id_book = this.props.match.params.id;
 
-        const req = await fetch(`https://www.googleapis.com/books/v1/volumes/${id_book}?key=AIzaSyAlN3r_xXHhgpuwYTYFcl4c3kKZJc6rXTY`)
+        const req = await fetch(`https://www.googleapis.com/books/v1/volumes/${id_book}?key=${process.env.REACT_APP_GOOGLE_BOOK_API_KEY}`)
 
         const res = await req.json();
         this.setState({book: res});
