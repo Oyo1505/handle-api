@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 function MoviesItems (props){
     const [name, setName] = useState('movie');
     const { movies, select } = props;
+    console.log(select)
         return (
             <>
              <div  id="movies-results">
@@ -21,12 +22,20 @@ function MoviesItems (props){
                             <MovieItem key={movie.id} movie={movie}  />
                         </Link>
                     </animated.div>
-                    <div className="clear"></div>
                      </>
                     ))}
                  </>    
                 }
-                { select === null &&
+               
+        </div>        
+    </>
+    )
+}
+export default MoviesItems;
+
+/*
+
+        { select === null &&
                 <> 
                 <h2>Movies</h2>
                 <br />
@@ -45,9 +54,5 @@ function MoviesItems (props){
         )}
         </Spring>
         </>        
-         }       
-        </div>        
-    </>
-    )
-}
-export default MoviesItems;
+         }
+*/
